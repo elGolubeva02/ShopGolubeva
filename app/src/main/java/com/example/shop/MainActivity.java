@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 params.weight = 3.0f;
                 addbt.setLayoutParams(params);
-                addbt.setText("Добавить в карзину");
+                addbt.setText("Добавить в корзину");
                 addbt.setId(cursor.getInt(idIndex));
                 tblayrow.addView(addbt);
                 tblay.addView(tblayrow);
