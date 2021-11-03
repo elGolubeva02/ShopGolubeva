@@ -10,13 +10,27 @@
         android:id="@+id/TxtNameAdd"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="100dp"
         android:text="Добавление нового товара"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/EdTxtName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/BtnNext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/BtnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Далее"
+        app:layout_constraintBottom_toTopOf="@+id/EdTxtName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/TxtNameAdd"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.352" />
+
     <EditText
         android:id="@+id/EdTxtName"
         android:layout_width="0dp"
@@ -26,51 +40,33 @@
         app:layout_constraintBottom_toTopOf="@+id/EdTxtPrise"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TxtNameAdd" />
+
     <EditText
         android:id="@+id/EdTxtPrise"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:hint="Цена"
         android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/BtnAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EdTxtName"
-        app:layout_constraintBottom_toTopOf="@+id/BtnAdd" />
+        app:layout_constraintTop_toBottomOf="@+id/EdTxtName" />
     <Button
         android:id="@+id/BtnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Добавить"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/BtnClear"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EdTxtPrise" />
-
     <Button
-        android:id="@+id/BtnArr"
+        android:id="@+id/BtnClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Оформить"
+        android:text="Очистить базу"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/TxtSumm"
-        app:layout_constraintTop_toBottomOf="@+id/BtnAdd" />
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toStartOf="@id/TxtSumm"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/BtnAdd"
-        app:srcCompat="@android:drawable/ic_menu_today" />
-    <TextView
-        android:id="@+id/TxtSumm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="Сумма стоимостей товаров в корзине"
-        app:layout_constraintEnd_toStartOf="@id/BtnArr"
-        app:layout_constraintStart_toEndOf="@id/imageView"
-        app:layout_constraintTop_toBottomOf="@id/BtnAdd" />
+        app:layout_constraintStart_toEndOf="@id/BtnAdd"
+        app:layout_constraintTop_toBottomOf="@+id/EdTxtPrise" />
 
     <TableLayout
         android:id="@+id/tblay"
@@ -78,28 +74,12 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BtnArr"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/BtnClear">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </TableLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

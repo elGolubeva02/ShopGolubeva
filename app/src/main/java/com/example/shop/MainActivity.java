@@ -15,9 +15,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    Button BtnAdd, BtnArr;
+    Button BtnAdd, BtnClear,btnNext;
     EditText EdTxtName, EdTxtPrise;
-    TextView TxtSumm;
     DBHelper dbHelper;
     SQLiteDatabase database;
     ContentValues contentValues;
@@ -28,11 +27,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         BtnAdd = (Button) findViewById(R.id.BtnAdd);
         BtnAdd.setOnClickListener(this);
-        BtnArr = (Button) findViewById(R.id.BtnArr);
-        BtnArr.setOnClickListener(this);
+        btnNext = (Button) findViewById(R.id.BtnNext);
+        btnNext.setOnClickListener(this);
+        BtnClear = (Button) findViewById(R.id.BtnClear);
+        BtnClear.setOnClickListener(this);
         EdTxtName = (EditText) findViewById(R.id.EdTxtName);
         EdTxtPrise = (EditText) findViewById(R.id.EdTxtPrise);
-        TxtSumm = (TextView) findViewById(R.id.TxtSumm);
         dbHelper = new DBHelper(this);
         database = dbHelper.getWritableDatabase();
         UpdateTable();
@@ -74,25 +74,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 deletbt.setId(cursor.getInt(idIndex));
                 tblayrow.addView(deletbt);
 
-                Button addbt = new Button(this);
-                addbt.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        View outputDBRoe = (View) view.getParent();
-                        ViewGroup outputDB = (ViewGroup) outputDBRoe.getParent();
-                        outputDB.removeView(outputDBRoe);
-                        outputDB.invalidate();
-                        float n1 = Float.parseFloat(outputprise.getText().toString());
-                        n = n + n1;
-                        TxtSumm.setText("" + n);
-                        UpdateTable();
-                    }
-                });
-                params.weight = 3.0f;
-                addbt.setLayoutParams(params);
-                addbt.setText("Добавить в корзину");
-                addbt.setId(cursor.getInt(idIndex));
-                tblayrow.addView(addbt);
                 tblay.addView(tblayrow);
             } while (cursor.moveToNext());
         } else
@@ -101,6 +82,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case  R.id.BtnNext:
+                Intent intent =new Intent(MainActivity.this, MainActivity2.class);
+                startActivity(intent);
+                break;
+
+            case R.id.BtnClear:
+                database.delete(DBHelper.TABLE_GOODS, null, null);
+                TableLayout dbOutput = findViewById(R.id.tblay);
+                dbOutput.removeAllViews();
+                EdTxtName.setText(null);
+                EdTxtPrise.setText(null);
+                UpdateTable();
+                break;
             case R.id.BtnAdd:
                 String name = EdTxtName.getText().toString();
                 String prise = EdTxtPrise.getText().toString();
@@ -111,13 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UpdateTable();
                 EdTxtName.setText(null);
                 EdTxtPrise.setText(null);
-                break;
-            case R.id.BtnArr:
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        TxtSumm.getText().toString(), Toast.LENGTH_SHORT);
-                toast.show();
-                TxtSumm.setText(null);
-                n=0;
                 break;
             default:
                 View outputDBRoe = (View) v.getParent();
@@ -145,7 +132,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     {
                         database.delete(DBHelper.TABLE_GOODS, DBHelper.KEY_ID+ " = ?", new String[] {cursorUpdater.getString(idIndex)});
                     }
+
                 }
+                UpdateTable();
                 break;
         }
     }
