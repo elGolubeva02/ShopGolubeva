@@ -15,7 +15,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    Button BtnAdd, BtnClear,btnNext;
+    Button BtnAdd, BtnClear;
     EditText EdTxtName, EdTxtPrise;
     DBHelper dbHelper;
     SQLiteDatabase database;
@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         BtnAdd = (Button) findViewById(R.id.BtnAdd);
         BtnAdd.setOnClickListener(this);
-        btnNext = (Button) findViewById(R.id.BtnNext);
-        btnNext.setOnClickListener(this);
         BtnClear = (Button) findViewById(R.id.BtnClear);
         BtnClear.setOnClickListener(this);
         EdTxtName = (EditText) findViewById(R.id.EdTxtName);
@@ -82,11 +80,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case  R.id.BtnNext:
-                Intent intent =new Intent(MainActivity.this, MainActivity2.class);
-                startActivity(intent);
-                break;
-
             case R.id.BtnClear:
                 database.delete(DBHelper.TABLE_GOODS, null, null);
                 TableLayout dbOutput = findViewById(R.id.tblay);
